@@ -1,0 +1,51 @@
+# значимая длина адреса
+rrl-ipv4-prefix-length=24
+
+# значимая длина адреса
+rrl-ipv6-prefix-length=56
+
+# типы запросов, при которых мы увеличиваем счётчик
+rrl-types=ANY,RRSIG
+# максимум ответов для запросов, тип которых определён в rrl-types
+rrl-limit-types-count=50
+
+# если отношение (размер запроса)/(размер ответа) больше этого числа, то счётчик увеличивается
+rrl-ratio=5.0
+# максимум ответов для запросов, чьё отношение
+# (размер запроса)/(размер ответа) больше, чем rrl-ratio
+rrl-limit-ratio-count=50
+
+# если число запросов привысит rrl-limit-ratio-count или rrl-limit-types-count в этот период,
+# то подсеть, с которой были эти запросы отправлены, будет заблокирована
+# измеряется в мс
+rrl-detection-period=10
+
+# время, на которое мы блокируем подсеть
+# измеряется в мс
+rrl-blocking-period=20
+
+# отбрасываем ли мы запросы или отсылаем truncate запросы
+# возможные варианты: yes, no (отсылаем truncate)
+rrl-drop-requests=no
+
+# записываются ли действия по блокировке/разблокировке в специальный файловый лог
+# если no, то логгирование идёт в обычный
+# возможные варианты: yes, no
+rrl-enable-log-file=yes
+# файл для логгирования 
+# если rrl-enable-log-file == no, то параметр не учитывается
+rrl-log-file=/home/massaraksh/powerdns/rrl.log
+
+# белый список - список подсетей, которые никогда не блокируются
+# возможные варианты: yes, no
+rrl-enable-white-list=yes
+# белый список подсетей
+# если rrl-enable-white-list == no, то параметр не учитывается
+rrl-white-list=/home/massaraksh/powerdns/white_list.conf
+
+# имеется возможность включать особые правила по блокировке для некоторых подсетей
+# возможные варианты: yes, no
+rrl-enable-special-limits=yes
+# файл со списком подсетей и особыми правилами для них
+# если rrl-enable-special-limits == no, то параметр не учитывается
+rrl-special-limits=/home/massaraksh/powerdns/special_limits.conf
